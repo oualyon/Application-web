@@ -21,9 +21,9 @@ body {
 #section-map {
 	position: relative;
 	width:  1000px;
-	border: 1px solid black;
+	border: 1px solid gray;
 	background-color: #FFFFFF;
-	padding: 0.5% 2% 5% 2%;
+	padding: 0.5% 2% 10% 2%;
 	margin-left:  auto; margin-right: auto;
 	margin-top:  4.5%; margin-bottom: 4.5%;
 	border-radius: 20px;
@@ -34,7 +34,7 @@ body {
 	text-align: center;
 }
 .circle {
-	border: 1px solid black;
+	border: 1px solid gray;
 	border-radius: 30px;
 	width: 15%;
 	height: 60%;
@@ -63,6 +63,33 @@ body {
 	margin-top: 1%;
 	border: 1px solid gray;
 	display: inline-block;
-	margin-left: 2%;
-	padding-top: 0.25%;
+	margin:  2%;
+	padding-top: 0.5%;
+}
+.btn-filtre:hover {
+	background-color: black;
+	color: white;
+}
+#link-redirection {
+	text-decoration: none;
+	color: gray;
+	text-align: center;
+	font-weight: 300;
+	font-size: 20px;
+
+}
+#redirection-btn {
+	width: 25%;
+	border: 1px solid gray;
+	padding: 1% 1%;
+	border-radius: 40px;
+	text-align: center;
+	float: right;
+	margin-top: 3%;
+
+}
+
+#redirection-btn:hover {
+	background-color: gray;
+	color: white;
 }
