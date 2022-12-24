@@ -3,16 +3,25 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="style.css">
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+	integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+	crossorigin=""/>
+
+
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Oualyon</title>
 </head>
 <body>
 	<section id="section-map">
 		<h2 class="title">O U A L Y O N</h2>
-		<div class="mapouter"><div class="gmap_canvas">
-		<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3335.037245771948!2d4.836827440422253!3d45.74623212055533!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f4ea47ef557179%3A0x9c043d6c0f43647f!2sLyon%20Ynov%20Campus!5e0!3m2!1sfr!2sfr!4v1669201356817!5m2!1sfr!2sfr" width="1000" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-		</iframe><a href="https://fmovies-online.net">fmovies</a><br>
-		<a href="https://www.embedgooglemap.net">embed google map location</a></div>
+
+		<div class="mapouter">
+		
+		<div class="gmap_canvas">
+
+
+
 		<div id="container-btn">
 			<div class="btn-filtre">Basket</div>
 			<div class="btn-filtre">Tennis</div>
@@ -21,10 +30,18 @@
 			<div class="btn-filtre">Laser-game</div>
 			<div class="btn-filtre">Escape Room</div>
 		</div>
-		
-		<a id="link-redirection" href="generation-carte.html"><div id="redirection-btn">Version OpenStreetMap ></div></a>
+
+		<div id="map">
+
+		</div>
+		<!-- <a id="link-redirection" href="generation-carte.html"><div id="redirection-btn">Version OpenStreetMap ></div></a> -->
 		
 	</section>
 </div>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+crossorigin=""></script>
+<script type="text/javascript" src="map.js"></script>
+
 </body>
 </html>
