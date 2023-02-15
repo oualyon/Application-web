@@ -93,3 +93,8 @@ body {
 	background-color: gray;
 	color: white;
 }
+
+#map { 
+	height: 700px;
+	margin-top: 1em;
+}	
