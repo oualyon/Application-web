@@ -29,10 +29,15 @@ OpenStreetMap_France.addTo(map);
 var markers = L.layerGroup().addTo(map); // Create a layer group to store markers
 
 function mapFetch(variableName) {
-//fetch('https://www.oualyon.fr/geo/' + variableName)
+    /*** Qualif ***/
+    // fetch('http://localhost:5000/geo/' + variableName)
+    /*** Qualif ***/
+    
+    /*** Production ***/
     const domain = window.location.hostname;
-    const url = 'https://' + domain + '/geo/' + variableName;
+    const url = 'https://' + domain + ':5000/geo/' + variableName;
     fetch(url)
+    /*** Production ***/
     .then(res => res.json())
     .then(data => {
         markers.clearLayers(); // Clear all markers before adding new ones
@@ -57,9 +62,9 @@ function mapFetch(variableName) {
                 return L.marker(latlng, {icon: selectedIcon});
             },
             onEachFeature: function (feature, layer) {
-                console.log(feature.properties);
-                console.error(feature.properties.Name);
-                layer.bindPopup(feature.properties.Name);
+                // console.log(feature.properties);
+                console.error(feature);
+                layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  "+  feature.properties["Code Postal"] );
             }
         }).addTo(markers); // Add new markers to the markers layer group
     });
