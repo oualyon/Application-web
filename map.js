@@ -62,16 +62,12 @@ function mapFetch(variableName) {
                 return L.marker(latlng, {icon: selectedIcon});
             },
             onEachFeature: function (feature, layer) {
-                // console.log(feature.properties);
-                console.error(feature);
+
                 layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  "+  feature.properties["Code Postal"] );
             }
         }).addTo(markers); // Add new markers to the markers layer group
     });
 }
-
-
-
 
 
 /********** JQUERY  *****************/
