@@ -28,17 +28,11 @@ OpenStreetMap_France.addTo(map);
 
 var markers = L.layerGroup().addTo(map); // Create a layer group to store markers
 
-  fetch('http://localhost:5000/geo/').then(res => res.json()).then(data => {
-      // add GeoJSON layer to the map once the file is loaded
-      L.geoJson(data).addTo(markers);
-      L.geoJson(data).bindPopup(
-      function(layer){
-          return layer.feature.properties.Name ; 
-      }).addTo(markers); // Add new markers to the markers layer group
-  });
-
 function mapFetch(variableName) {
-    fetch('http://localhost:5000/geo/' + variableName)
+//fetch('https://www.oualyon.fr/geo/' + variableName)
+    const domain = window.location.hostname;
+    const url = 'https://' + domain + '/geo/' + variableName;
+    fetch(url)
     .then(res => res.json())
     .then(data => {
         markers.clearLayers(); // Clear all markers before adding new ones
