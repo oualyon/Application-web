@@ -3,13 +3,13 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="style.css">
-
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
 	integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
 	crossorigin=""/>
 	<script data-require="leaflet@0.7.7" data-semver="0.7.7" src="//cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.0/leaflet.js"></script>
 	<script src="https://npmcdn.com/leaflet-geometryutil"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
 	<title>Oualyon</title>
 </head>
 <body>
@@ -23,26 +23,18 @@
 
 
 		<div id="container-btn">
-			<div id="BasketBall"class="btn-filtre">Basket</div>
-			<div id="FootBall" 	class="btn-filtre">Football</div>
-			<div id="Natation"  class="btn-filtre">Natation</div>
-			<div id="Rugby"     class="btn-filtre">Rugby</div>
-			<div id="Gymnase"   class="btn-filtre">Gymnase</div>
-			<div id="Randos" 	class="btn-filtre">randonee</div>
+			<div id="gpx" 	    class="btn-filtre road">Tête d'or</div>
+            <div id="Bar" 	    class="btn-filtre road">Barathon</div>
+			<!-- <div id="bar_guillotiere_to_vieuxlyon" 	    class="btn-filtre road">Barathon Guillotière Vieux Lyon</div> -->
 			<div id="Station" 	class="btn-filtre">Velov</div>
-			<div ><a href="velo.html" >map velo</a></div>
-		</div>
-
-		
-		<!-- <a id="link-redirection" href="generation-carte.html"><div id="redirection-btn">Version OpenStreetMap ></div></a> -->
-		
+		</div>		
 	</section>
 </div>
-<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
 integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
 crossorigin=""></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="map.js"></script>
+<script type="text/javascript" src="velo.js"></script>
 
 </body>
 </html>

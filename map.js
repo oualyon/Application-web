@@ -13,8 +13,8 @@ var BasketBall = new LeafIcon({iconUrl: 'img/Basketball.png'}),
     FootBall = new LeafIcon({iconUrl: 'img/Football.png'}),
     Gymnase = new LeafIcon({iconUrl: 'img/Gymnase.png'}),
     Natation = new LeafIcon({iconUrl: 'img/Natation.png'}),
-
-
+    Randos = new LeafIcon({iconUrl: 'img/Randos.png'}),
+    Station = new LeafIcon({iconUrl: 'img/Station.png'}),
     Rugby = new LeafIcon({iconUrl: 'img/Rugby.png'});
 
 /********** MAP  *****************/
@@ -30,18 +30,21 @@ var markers = L.layerGroup().addTo(map); // Create a layer group to store marker
 
 function mapFetch(variableName) {
     /*** Qualif ***/
-    // fetch('http://localhost:5000/geo/' + variableName)
+    fetch('http://localhost:5000/geo/' + variableName)
     /*** Qualif ***/
     
     /*** Production ***/
-    const domain = window.location.hostname;
-    const url = 'https://' + domain + ':5000/geo/' + variableName;
-    fetch(url)
+    // const domain = window.location.hostname;
+    // const url = 'https://' + domain + '/geo/' + variableName;
+    // fetch(url)
     /*** Production ***/
+
     .then(res => res.json())
     .then(data => {
         markers.clearLayers(); // Clear all markers before adding new ones
         var selectedIcon;
+        var longueur, duree, difficulte, denivelee;
+
         if(variableName == "BasketBall"){
             selectedIcon = BasketBall;
         }
@@ -57,6 +60,12 @@ function mapFetch(variableName) {
         else if(variableName == "Rugby"){
             selectedIcon = Rugby;
         }
+        else if(variableName == "Randos"){
+            selectedIcon = Randos;
+        }
+        else if(variableName == "Station"){
+            selectedIcon = Station;
+        }
         L.geoJson(data, {
             pointToLayer: function (feature, latlng) {
                 return L.marker(latlng, {icon: selectedIcon});
@@ -71,7 +80,19 @@ function mapFetch(variableName) {
 
 
 /********** JQUERY  *****************/
+var maVariablePrecedente = "";
+
 $(".btn-filtre").click(function(){
     var maVariable = $(this).attr("id");
-    mapFetch(maVariable);
+
+    if (maVariable === maVariablePrecedente) {
+        clearMarkers();
+    } else {
+        mapFetch(maVariable);
+        maVariablePrecedente = maVariable;
+    }
 });
+
+function clearMarkers() {
+    markers.clearLayers();
+}
