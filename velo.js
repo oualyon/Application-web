@@ -72,7 +72,7 @@ function roadFetch(variableName) {
         if(variableName == "Station"){
             selectedIcon = Station;
         }
-        else if(variableName == "Bar"){
+        else if(/^Bar/.test(variableName)){
             selectedIcon = Bar;
         }
         L.geoJson(data, {
