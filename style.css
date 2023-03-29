@@ -52,7 +52,7 @@ a {
 	float: right;
 }
  h4 {
- 	margin-top: 3%;
+ 	margin-top: 2%;
  	font-size: 23px;
  	font-weight: 300;
  	color: #114B5F;
@@ -87,9 +87,10 @@ a {
 	border: 3px solid #7FC6A4;
 	border-radius: 10px;
 	color: #7FC6A4;
-	font-size: 22px;
+	font-size: 20px;
 	font-weight: 800;
 	margin-left: auto; margin-right: auto;
+	display: inline;
 
 }
 .button {
@@ -101,4 +102,18 @@ a {
 	font-size: 22px;
 	font-weight: 800;
 	margin-left: auto; margin-right: auto;
+	display: inline;
+}
+#container-btn {
+	width: 25%;
+	padding: 1% 2%;
+	border: 3px solid #7FC6A4;
+	border-radius: 10px;
+	color: #7FC6A4;
+	font-size: 18px;
+	font-weight: 500;
+}
+#align-buttons {
+	width: 100%;
+	display: inline-block;
 }
