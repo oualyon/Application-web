@@ -21,7 +21,7 @@ var BasketBall = new LeafIcon({iconUrl: 'img/Basketball.png'}),
     Petanque = new LeafIcon({iconUrl: 'img/Petanque.png'}),
     Tennis_table = new LeafIcon({iconUrl: 'img/Pingpong.png'}),
     VolleyBall = new LeafIcon({iconUrl: 'img/Volley.png'}),
-
+    Martiaux = new LeafIcon({iconUrl: 'img/Judo.png'}),
     Rugby = new LeafIcon({iconUrl: 'img/Rugby.png'});
 
 /********** MAP  *****************/
@@ -63,6 +63,9 @@ function mapFetch(variableName) {
         }
         else if(variableName == "Tennis%20de%20table"){
             selectedIcon = Tennis_table;
+        }
+        else if(variableName == "Arts%20martiaux"){
+            selectedIcon = Martiaux;
         }
         else if(variableName == "Pétanque"){
             selectedIcon = Petanque;
@@ -123,5 +126,5 @@ function clearMarkers() {
 }
 
 $("#logo").click(function() {
-    alert("Image cliquée");
+    window.location.href  = "index.html";
 })

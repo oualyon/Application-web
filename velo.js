@@ -112,12 +112,14 @@ $(".road").click(function() {
     $(this).data("clicks", !clicks);
   });
 
-  $(".Geolocalisation").click(function() {
+$(".Geolocalisation").click(function() {
     var clicks = $(this).data('clicks');
     if (clicks) {
     var Geolocalisation = $(this).attr("Geolocalisation");
-
     }
-
     $(this).data("clicks", !clicks);
   });
+
+$("#logo").click(function() {
+    window.location.href  = "index.html";
+})
