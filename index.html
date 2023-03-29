@@ -3,43 +3,54 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="style.css">
-
+	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+	integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+	crossorigin=""></script>
+	<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="map.js"></script>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
 	integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
 	crossorigin=""/>
-
-
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre&display=swap" rel="stylesheet">
 	<title>Oualyon</title>
 </head>
 <body>
-	<section id="section-map">
-		<h2 class="title">O U A L Y O N</h2>
-		<div id="map"></div>
-
-		<div class="mapouter">
-		
-		<div class="gmap_canvas">
-
-
-		<div id="container-btn">
-			<div id="BasketBall"class="btn-filtre">Basket</div>
-			<div id="FootBall" 	class="btn-filtre">Football</div>
-			<div id="Natation"  class="btn-filtre">Natation</div>
-			<div id="Rugby"     class="btn-filtre">Rugby</div>
-			<div id="Gymnase"   class="btn-filtre">Gymnase</div>
+	<header>
+		<div id="section-logo-title">
+			<p id="title"><img id="logo" src="logo.png" alt="logo" /> Oualyon</p>
 		</div>
-
-		
-		<!-- <a id="link-redirection" href="generation-carte.html"><div id="redirection-btn">Version OpenStreetMap ></div></a> -->
-		
-	</section>
-</div>
-<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-crossorigin=""></script>
-<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="map.js"></script>
-
+		<div id="section-menu-link">
+			<a href="velo.html"><div class="menu-link-box">
+				<p class="menu-link">Vélo</p>
+			</div></a> 
+			<a href="randonnee.html"><div class="menu-link-box">
+				<p class="menu-link">Randonnée</p>
+			</div></a>	
+		</div>
+	</header>
+	<main>
+		<h4>Vous recherchez une activité proche de chez vous ?</h4>
+		<div id="divider"></div>
+		<img class="sport" id="archer" src="img/archer.png"></img>
+		<img class="sport" src="img/basket.png"></img>
+		<img class="sport" src="img/course.png"></img>
+		<img class="sport" src="img/escalade.png"></img>
+		<img class="sport" src="img/judo.png"></img>
+		<img class="sport" src="img/natation.png"></img>
+		<img class="sport" src="img/petanque.png"></img>
+		<img class="sport" src="img/pingpong.png"></img>
+		<img class="sport" src="img/skateboard.png"></img>
+		<img class="sport" src="img/volley.png"></img>
+		<div id="map"></div>
+		<div class="geolocalisation">Me géolocaliser</div>
+	</main>
 </body>
+
+<script>
+	$("#logo").click(function() {
+		alert("Image cliquée");
+	})
+</script>
 </html>
