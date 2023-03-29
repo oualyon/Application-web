@@ -37,13 +37,13 @@ var markers = L.layerGroup().addTo(map); // Create a layer group to store marker
 
 function mapFetch(variableName) {
     /*** Qualif ***/
-    // fetch('http://localhost:5000/geo/' + variableName)
+    fetch('http://localhost:5000/geo/' + variableName)
     /*** Qualif ***/
     
     /*** Production ***/
-    const domain = window.location.hostname;
-    const url = 'https://' + domain + '/geo/' + variableName;
-    fetch(url)
+    // const domain = window.location.hostname;
+    // const url = 'https://' + domain + '/geo/' + variableName;
+    // fetch(url)
     /*** Production ***/
 
     .then(res => res.json())
@@ -108,8 +108,7 @@ function mapFetch(variableName) {
 
 /********** JQUERY  *****************/
 $(".sport").click(function(){
-    // var clicks = $(this).data('clicks') || true; 
-var clicks = $(this).data('clicks') 
+    var clicks = $(this).data('clicks') || true; 
      if (clicks) {
          var maVariable = $(this).attr("id");
          mapFetch(maVariable);
