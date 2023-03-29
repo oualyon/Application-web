@@ -50,7 +50,6 @@ function mapFetch(variableName) {
     .then(data => {
         markers.clearLayers(); // Clear all markers before adding new ones
         var selectedIcon;
-        var longueur, duree, difficulte, denivelee;
 
         if(variableName == "BasketBall"){
             selectedIcon = BasketBall;
