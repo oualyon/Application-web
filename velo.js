@@ -28,13 +28,13 @@ var markersItinary = L.layerGroup(2).addTo(map); // Create a layer group to stor
 
 function mapFetch(variableName) {
     /*** Qualif ***/
-    //fetch('http://localhost:5000/geo/' + variableName)
+    fetch('http://localhost:5000/geo/' + variableName)
     /*** Qualif ***/
     
     /*** Production ***/
-    const domain = window.location.hostname;
-    const url = 'https://' + domain + '/geo/' + variableName;
-    fetch(url)
+    // const domain = window.location.hostname;
+    // const url = 'https://' + domain + '/geo/' + variableName;
+    // fetch(url)
     /*** Production ***/
     .then(res => res.json())
     .then(data => {

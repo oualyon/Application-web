@@ -37,18 +37,18 @@ var markers = L.layerGroup().addTo(map); // Create a layer group to store marker
 
 function mapFetch(variableName) {
     /*** Qualif ***/
-    // fetch('http://localhost:5000/geo/' + variableName)
+    fetch('http://localhost:5000/geo/' + variableName)
     /*** Qualif ***/
     
     /*** Production ***/
-    const domain = window.location.hostname;
-    const url = 'https://' + domain + '/geo/' + variableName;
-    fetch(url)
+    // const domain = window.location.hostname;
+    // const url = 'https://' + domain + '/geo/' + variableName;
+    // fetch(url)
     /*** Production ***/
 
     .then(res => res.json())
     .then(data => {
-        markers.clearLayers(); // Clear all markers before adding new ones
+        markers.clearLayers();
         var selectedIcon;
 
         if(variableName == "BasketBall"){
@@ -110,15 +110,17 @@ function mapFetch(variableName) {
 var maVariablePrecedente = "";
 
 $(".sport").click(function(){
-    var maVariable = $(this).attr("id");
-
-    if (maVariable === maVariablePrecedente) {
-        clearMarkers();
-    } else {
-        mapFetch(maVariable);
-        maVariablePrecedente = maVariable;
-    }
-});
+    // var clicks = $(this).data('clicks') || true; 
+var clicks = $(this).data('clicks') 
+     if (clicks) {
+         var maVariable = $(this).attr("id");
+         mapFetch(maVariable);
+     }
+     if (!clicks) {
+         markers.clearLayers() ; 
+     }
+     $(this).data("clicks", !clicks);
+ });
 
 function clearMarkers() {
     markers.clearLayers();
