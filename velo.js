@@ -112,13 +112,47 @@ $(".road").click(function() {
     $(this).data("clicks", !clicks);
   });
 
-$(".Geolocalisation").click(function() {
-    var clicks = $(this).data('clicks');
-    if (clicks) {
-    var Geolocalisation = $(this).attr("Geolocalisation");
+
+$(".geolocalisation").click(function(){
+    // var clicks = $(this).data('clicks') || true; 
+var clicks = $(this).data('clicks') 
+     if (clicks) {
+        Geolocalisation();
+     }
+
+     $(this).data("clicks", !clicks);
+ });
+
+
+function Geolocalisation(){
+    const locationOptions = {
+        maximumAge: 10000,
+        timeout: 5000,
+        enableHighAccuracy: true
+    };
+     /* Verifie que le navigateur est compatible avec la géolocalisation */
+     if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(handleLocation, handleLocationError, locationOptions);
+    } else {
+        /* Le navigateur n'est pas compatible */
+        alert("Géolocalisation indisponible");
     }
-    $(this).data("clicks", !clicks);
-  });
+
+}
+
+
+function handleLocation(position) {
+    /* Zoom avant de trouver la localisation */
+    map.setZoom(18);
+    /* Centre la carte sur la latitude et la longitude de la localisation de l'utilisateur */
+    map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
+    var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+
+}
+
+function handleLocationError(msg) {
+    alert("Erreur lors de la géolocalisation");
+}
 
 $("#logo").click(function() {
     window.location.href  = "index.html";
