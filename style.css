@@ -72,13 +72,15 @@ a {
 	background-color: #7FC6A4;
 }
 #map {
-	width: 90%;
-	height: 400px;
+    width: 100%;
+	height: 600px;
 	background-color: #DAECE9;
 	box-shadow: 10px 5px 5px grey;
 	margin-left: auto; margin-right: auto;
 	margin-top: 2%; margin-bottom: 2%;
 }
+
+
 .geolocalisation {
 	width: 20%;
 	padding: 1% 2%;
@@ -89,4 +91,14 @@ a {
 	font-weight: 800;
 	margin-left: auto; margin-right: auto;
 
+}
+.button {
+	width: 20%;
+	padding: 1% 2%;
+	border: 3px solid #7FC6A4;
+	border-radius: 10px;
+	color: #7FC6A4;
+	font-size: 22px;
+	font-weight: 800;
+	margin-left: auto; margin-right: auto;
 }

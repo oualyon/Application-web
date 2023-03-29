@@ -21,6 +21,7 @@
 		<div id="section-logo-title">
 			<p id="title"><img id="logo" src="img/logo.png" alt="logo" /> Oualyon</p>
 		</div>
+
 		<div id="section-menu-link">
 			<a href="velo.html"><div class="menu-link-box">
 				<p class="menu-link">Vélo</p>
@@ -36,15 +37,21 @@
 		
 		<div id="map"></div>
 		<div class="geolocalisation">Me géolocaliser</div>
+		<div id="container-btn">
+			<div id="gpx" 	    class="btn-filtre  button  road">Tête d'or</div>
+            <div id="Bar" 	    class="btn-filtre  button road">Barathon</div>
+			<div id="Bar_guillotiere_to_vieuxlyon" 	    class="btn-filtre button  road">Barathon 2 </div>
+			<div id="Station" 	class="btn-filtre button Velov ">Velov</div>
+			<div id="Geolocalisation" 	class="btn-filtre button Geolocalisation ">Geolocalisation</div>
+		</div>		
 	</main>
 </body>
 
-<script>
-	$("#logo").click(function() {
-		window.location.href  = "index.html";
-	})
-</script>
-
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+crossorigin=""></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="velo.js"></script>
 
 </body>
 </html>

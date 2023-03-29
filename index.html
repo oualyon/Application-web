@@ -33,6 +33,7 @@
 	<main>
 		<h4>Vous recherchez une activité proche de chez vous ?</h4>
 		<div id="divider"></div>
+
 		<img class="sport" title="Tir à l'arc" id="archer" src="img/archer.png"></img>
 		<img class="sport" title="Basket" src="img/basket.png"></img>
 		<img class="sport" title="Course à pied" src="img/course.png"></img>
@@ -46,13 +47,16 @@
 		<div id="map">
 
 		</div>
+
+	
 		<div class="geolocalisation">Me géolocaliser</div>
 	</main>
 </body>
 
-<script>
-	$("#logo").click(function() {
-		window.location.href  = "index.html";
-	})
-</script>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
+integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+crossorigin=""></script>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="map.js"></script>
+
 </html>

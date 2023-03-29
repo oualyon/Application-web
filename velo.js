@@ -10,7 +10,7 @@ var LeafIcon = L.Icon.extend({
     }
 });
 var Station = new LeafIcon({iconUrl: 'img/Station.png'}),
-Bar = new LeafIcon({iconUrl: 'img/biere.png'});
+Bar = new LeafIcon({iconUrl: 'img/Biere.png'});
 
 
 /********** MAP  *****************/
@@ -23,7 +23,8 @@ var map = L.map('map').setView([45.7603831, 4.849664], 13);
  CartoDB_Positron.addTo(map);
 
 
-var markers = L.layerGroup().addTo(map); // Create a layer group to store markers
+var markersVelov = L.layerGroup(1).addTo(map); // Create a layer group to store markers
+var markersItinary = L.layerGroup(2).addTo(map); // Create a layer group to store markers
 
 function mapFetch(variableName) {
     /*** Qualif ***/
@@ -50,7 +51,7 @@ function mapFetch(variableName) {
 
                 layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  "+  feature.properties["Code Postal"] );
             }
-        }).addTo(markers); // Add new markers to the markers layer group
+        }).addTo(markersVelov); // Add new markers to the markers layer group
     });
 }
 
@@ -69,10 +70,7 @@ function roadFetch(variableName) {
     .then(data => {
         // markers.clearLayers(); // Clear all markers before adding new ones
         var selectedIcon; 
-        if(variableName == "Station"){
-            selectedIcon = Station;
-        }
-        else if(/^Bar/.test(variableName)){
+        if(/^Bar/.test(variableName)){
             selectedIcon = Bar;
         }
         L.geoJson(data, {
@@ -83,18 +81,45 @@ function roadFetch(variableName) {
 
                 layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  "+  feature.properties["Code Postal"] );
             }
-        }).addTo(markers); // Add new markers to the markers layer group
+        }).addTo(markersItinary); // Add new markers to the markers layer group
     });
 }
 
-
+function Geolocalisation() {
+    
+}
 /********** JQUERY  *****************/
-$(".btn-filtre").click(function(){
-    var maVariable = $(this).attr("id");
-    mapFetch(maVariable);
-});
 
-$(".road").click(function(){
-    var maVariable = $(this).attr("id");
-    roadFetch(maVariable);
-});
+$(".Velov").click(function() {
+    var clicks = $(this).data('clicks');
+    if (clicks) {
+    var pointFix = $(this).attr("id");
+    mapFetch(pointFix);
+    } else {
+        markersVelov.clearLayers();
+    }
+    $(this).data("clicks", !clicks);
+  });
+
+$(".road").click(function() {
+    var clicks = $(this).data('clicks');
+    if (clicks) {
+    var itinary = $(this).attr("id");
+    roadFetch(itinary);
+    } else {
+        markersItinary.clearLayers() ; 
+    }
+    $(this).data("clicks", !clicks);
+  });
+
+$(".Geolocalisation").click(function() {
+    var clicks = $(this).data('clicks');
+    if (clicks) {
+    var Geolocalisation = $(this).attr("Geolocalisation");
+    }
+    $(this).data("clicks", !clicks);
+  });
+
+$("#logo").click(function() {
+    window.location.href  = "index.html";
+})
