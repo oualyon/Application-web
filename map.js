@@ -15,6 +15,13 @@ var BasketBall = new LeafIcon({iconUrl: 'img/Basketball.png'}),
     Natation = new LeafIcon({iconUrl: 'img/Natation.png'}),
     Randos = new LeafIcon({iconUrl: 'img/Randos.png'}),
     Station = new LeafIcon({iconUrl: 'img/Station.png'}),
+    Tir = new LeafIcon({iconUrl: 'img/Archer.png'}),
+    Course = new LeafIcon({iconUrl: 'img/Course.png'}),
+    Escalade = new LeafIcon({iconUrl: 'img/Escalade.png'}),
+    Petanque = new LeafIcon({iconUrl: 'img/Petanque.png'}),
+    Tennis_table = new LeafIcon({iconUrl: 'img/Pingpong.png'}),
+    VolleyBall = new LeafIcon({iconUrl: 'img/Volley.png'}),
+
     Rugby = new LeafIcon({iconUrl: 'img/Rugby.png'});
 
 /********** MAP  *****************/
@@ -47,6 +54,24 @@ function mapFetch(variableName) {
 
         if(variableName == "BasketBall"){
             selectedIcon = BasketBall;
+        }
+        else if(variableName == "Tir"){
+            selectedIcon = Tir;
+        }
+        else if(variableName == "Course%20à%20pied"){
+            selectedIcon = Course;
+        }
+        else if(variableName == "Tennis%20de%20table"){
+            selectedIcon = Tennis_table;
+        }
+        else if(variableName == "Pétanque"){
+            selectedIcon = Petanque;
+        }
+        else if(variableName == "VolleyBall"){
+            selectedIcon = VolleyBall;
+        }
+        else if(variableName == "Escalade"){
+            selectedIcon = Escalade;
         }
         else if(variableName == "FootBall"){
             selectedIcon = FootBall;
@@ -82,7 +107,7 @@ function mapFetch(variableName) {
 /********** JQUERY  *****************/
 var maVariablePrecedente = "";
 
-$(".btn-filtre").click(function(){
+$(".sport").click(function(){
     var maVariable = $(this).attr("id");
 
     if (maVariable === maVariablePrecedente) {
@@ -96,3 +121,7 @@ $(".btn-filtre").click(function(){
 function clearMarkers() {
     markers.clearLayers();
 }
+
+$("#logo").click(function() {
+    alert("Image cliquée");
+})

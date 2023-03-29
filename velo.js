@@ -10,7 +10,7 @@ var LeafIcon = L.Icon.extend({
     }
 });
 var Station = new LeafIcon({iconUrl: 'img/Station.png'}),
-Bar = new LeafIcon({iconUrl: 'img/biere.png'});
+Bar = new LeafIcon({iconUrl: 'img/Biere.png'});
 
 
 /********** MAP  *****************/
