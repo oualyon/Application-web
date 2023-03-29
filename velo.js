@@ -33,7 +33,7 @@ function mapFetch(variableName) {
     
     /*** Production ***/
     const domain = window.location.hostname;
-    const url = 'https://' + domain + '/itinary/' + variableName;
+    const url = 'https://' + domain + '/geo/' + variableName;
     fetch(url)
     /*** Production ***/
     .then(res => res.json())
@@ -58,7 +58,7 @@ function mapFetch(variableName) {
 
 function roadFetch(variableName) {
     /*** Qualif ***/
-    // fetch('http://localhost:5000/itinary/' + variableName)
+    //  fetch('http://localhost:5000/itinary/' + variableName)
     /*** Qualif ***/
     
     /*** Production ***/
