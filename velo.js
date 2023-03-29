@@ -33,7 +33,7 @@ function mapFetch(variableName) {
     
     /*** Production ***/
     const domain = window.location.hostname;
-    const url = 'https://' + domain + '/geo/' + variableName;
+    const url = 'https://' + domain + '/itinary/' + variableName;
     fetch(url)
     /*** Production ***/
     .then(res => res.json())
@@ -63,7 +63,7 @@ function roadFetch(variableName) {
     
     /*** Production ***/
     const domain = window.location.hostname;
-    const url = 'https://' + domain + '/geo/' + variableName;
+    const url = 'https://' + domain + '/itinary/' + variableName;
     fetch(url)
     /*** Production ***/
     .then(res => res.json())
