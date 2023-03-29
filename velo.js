@@ -10,7 +10,7 @@ var LeafIcon = L.Icon.extend({
     }
 });
 var Station = new LeafIcon({iconUrl: 'img/Station.png'}),
-Bar = new LeafIcon({iconUrl: 'img/biere.png'});
+Bar = new LeafIcon({iconUrl: 'img/Biere.png'});
 
 
 /********** MAP  *****************/
@@ -81,11 +81,13 @@ function roadFetch(variableName) {
 
                 layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  "+  feature.properties["Code Postal"] );
             }
-        }).addTo(markersDot); // Add new markers to the markers layer group
+        }).addTo(markersItinary); // Add new markers to the markers layer group
     });
 }
 
-
+function Geolocalisation() {
+    
+}
 /********** JQUERY  *****************/
 
 $(".Velov").click(function() {
@@ -94,7 +96,7 @@ $(".Velov").click(function() {
     var pointFix = $(this).attr("id");
     mapFetch(pointFix);
     } else {
-    markers.clearLayers();
+        markersVelov.clearLayers();
     }
     $(this).data("clicks", !clicks);
   });
@@ -105,7 +107,19 @@ $(".road").click(function() {
     var itinary = $(this).attr("id");
     roadFetch(itinary);
     } else {
-        markersDot.clearLayers() ; 
+        markersItinary.clearLayers() ; 
     }
     $(this).data("clicks", !clicks);
   });
+
+$(".Geolocalisation").click(function() {
+    var clicks = $(this).data('clicks');
+    if (clicks) {
+    var Geolocalisation = $(this).attr("Geolocalisation");
+    }
+    $(this).data("clicks", !clicks);
+  });
+
+$("#logo").click(function() {
+    window.location.href  = "index.html";
+})
