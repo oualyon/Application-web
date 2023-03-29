@@ -25,16 +25,17 @@ var map = L.map('map').setView([45.7603831, 4.849664], 13);
 
 var markersVelov = L.layerGroup(1).addTo(map); // Create a layer group to store markers
 var markersItinary = L.layerGroup(2).addTo(map); // Create a layer group to store markers
+let GeolocalisationLayer ;
 
 function mapFetch(variableName) {
     /*** Qualif ***/
-    fetch('http://localhost:5000/geo/' + variableName)
+    // fetch('http://localhost:5000/geo/' + variableName)
     /*** Qualif ***/
     
     /*** Production ***/
-    // const domain = window.location.hostname;
-    // const url = 'https://' + domain + '/geo/' + variableName;
-    // fetch(url)
+    const domain = window.location.hostname;
+    const url = 'https://' + domain + '/geo/' + variableName;
+    fetch(url)
     /*** Production ***/
     .then(res => res.json())
     .then(data => {
@@ -58,13 +59,13 @@ function mapFetch(variableName) {
 
 function roadFetch(variableName) {
     /*** Qualif ***/
-    fetch('http://localhost:5000/itinary/' + variableName)
+    //  fetch('http://localhost:5000/itinary/' + variableName)
     /*** Qualif ***/
     
     /*** Production ***/
-    // const domain = window.location.hostname;
-    // const url = 'https://' + domain + '/geo/' + variableName;
-    // fetch(url)
+    const domain = window.location.hostname;
+    const url = 'https://' + domain + '/itinary/' + variableName;
+    fetch(url)
     /*** Production ***/
     .then(res => res.json())
     .then(data => {
@@ -89,17 +90,55 @@ function Geolocalisation() {
     
 }
 /********** JQUERY  *****************/
-
-$(".Velov").click(function() {
-    var clicks = $(this).data('clicks');
-    if (clicks) {
-    var pointFix = $(this).attr("id");
-    mapFetch(pointFix);
-    } else {
-        markersVelov.clearLayers();
-    }
-    $(this).data("clicks", !clicks);
+$(document).ready(function() {
+    $('#container-btn').change(function() {
+      var selectedOption = $('#container-btn option:selected').attr('id');
+  
+      switch (selectedOption) {
+        case 'gpx':
+            roadFetch(selectedOption);
+          break;
+        case 'Bar':
+            roadFetch(selectedOption);
+          break;
+        case 'Bar_guillotiere_to_vieuxlyon':
+            roadFetch(selectedOption);
+            break;
+        case 'Station':
+            mapFetch(selectedOption);
+            $(".Velov").click(function() {
+                var clicks = $(this).data('clicks');
+                if (clicks) {
+                  var pointFix = $(this).attr("id");
+                  mapFetch(pointFix);
+                } else {
+                  markersVelov.clearLayers();
+                }
+                $(this).data("clicks", !clicks);
+              });
+            break;
+        case 'Geolocalisation':
+          // Action à effectuer pour l'option Geolocalisation
+          break;
+        default:
+          // Action à effectuer si aucune option n'est sélectionnée
+          break;
+      }
+    });
   });
+  
+function veloSation(){
+    $(".Velov").click(function() {
+        var clicks = $(this).data('clicks');
+        if (clicks) {
+        var pointFix = $(this).attr("id");
+        mapFetch(pointFix);
+        } else {
+            markersVelov.clearLayers();
+        }
+        $(this).data("clicks", !clicks);
+      });
+}
 
 $(".road").click(function() {
     var clicks = $(this).data('clicks');
@@ -112,13 +151,49 @@ $(".road").click(function() {
     $(this).data("clicks", !clicks);
   });
 
-$(".Geolocalisation").click(function() {
-    var clicks = $(this).data('clicks');
-    if (clicks) {
-    var Geolocalisation = $(this).attr("Geolocalisation");
+
+$(".geolocalisation").click(function(){
+    // var clicks = $(this).data('clicks') || true; 
+var clicks = $(this).data('clicks') 
+     if (clicks) {
+        Geolocalisation();
+
+     }else {
+        geolocation.clearLayers() ; 
     }
-    $(this).data("clicks", !clicks);
-  });
+
+     $(this).data("clicks", !clicks);
+ });
+
+
+function Geolocalisation(){
+    const locationOptions = {
+        maximumAge: 10000,
+        timeout: 5000,
+        enableHighAccuracy: true
+    };
+     /* Verifie que le navigateur est compatible avec la géolocalisation */
+     if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(handleLocation, handleLocationError, locationOptions);
+    } else {
+        /* Le navigateur n'est pas compatible */
+        alert("Géolocalisation indisponible");
+    }
+
+}
+
+function handleLocation(position) {
+    /* Zoom avant de trouver la localisation */
+    map.setZoom(18);
+    /* Centre la carte sur la latitude et la longitude de la localisation de l'utilisateur */
+    map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
+    GeolocalisationLayer = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+
+}
+
+function handleLocationError(msg) {
+    alert("Erreur lors de la géolocalisation");
+}
 
 $("#logo").click(function() {
     window.location.href  = "index.html";

@@ -37,20 +37,19 @@ var markers = L.layerGroup().addTo(map); // Create a layer group to store marker
 
 function mapFetch(variableName) {
     /*** Qualif ***/
-    fetch('http://localhost:5000/geo/' + variableName)
+    // fetch('http://localhost:5000/geo/' + variableName)
     /*** Qualif ***/
     
     /*** Production ***/
-    // const domain = window.location.hostname;
-    // const url = 'https://' + domain + '/geo/' + variableName;
-    // fetch(url)
+    const domain = window.location.hostname;
+    const url = 'https://' + domain + '/geo/' + variableName;
+    fetch(url)
     /*** Production ***/
 
     .then(res => res.json())
     .then(data => {
-        markers.clearLayers(); // Clear all markers before adding new ones
+        // markers.clearLayers();
         var selectedIcon;
-        var longueur, duree, difficulte, denivelee;
 
         if(variableName == "BasketBall"){
             selectedIcon = BasketBall;
@@ -108,21 +107,63 @@ function mapFetch(variableName) {
 
 
 /********** JQUERY  *****************/
-var maVariablePrecedente = "";
-
 $(".sport").click(function(){
-    var maVariable = $(this).attr("id");
-
-    if (maVariable === maVariablePrecedente) {
-        clearMarkers();
-    } else {
-        mapFetch(maVariable);
-        maVariablePrecedente = maVariable;
-    }
-});
+    var clicks = $(this).data('clicks') || true; 
+     if (clicks) {
+         var maVariable = $(this).attr("id");
+         mapFetch(maVariable);
+     }
+    //  if (!clicks) {
+    //      markers.clearLayers() ; 
+    //  }
+     $(this).data("clicks", !clicks);
+ });
 
 function clearMarkers() {
     markers.clearLayers();
+}
+
+$(".geolocalisation").click(function(){
+    // var clicks = $(this).data('clicks') || true; 
+    var clicks = $(this).data('clicks') 
+     if (clicks) {
+        Geolocalisation();
+     }
+     $(this).data("clicks", !clicks);
+ });
+
+ $(".Reset").click(function(){
+    markers.clearLayers();
+ });
+
+function Geolocalisation(){
+    const locationOptions = {
+        maximumAge: 10000,
+        timeout: 5000,
+        enableHighAccuracy: true
+    };
+     /* Verifie que le navigateur est compatible avec la géolocalisation */
+     if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(handleLocation, handleLocationError, locationOptions);
+    } else {
+        /* Le navigateur n'est pas compatible */
+        alert("Géolocalisation indisponible");
+    }
+
+}
+
+
+function handleLocation(position) {
+    /* Zoom avant de trouver la localisation */
+    map.setZoom(18);
+    /* Centre la carte sur la latitude et la longitude de la localisation de l'utilisateur */
+    map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
+    var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+
+}
+
+function handleLocationError(msg) {
+    alert("Erreur lors de la géolocalisation");
 }
 
 $("#logo").click(function() {
