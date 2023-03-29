@@ -48,7 +48,7 @@ function mapFetch(variableName) {
 
     .then(res => res.json())
     .then(data => {
-        markers.clearLayers();
+        // markers.clearLayers();
         var selectedIcon;
 
         if(variableName == "BasketBall"){
@@ -107,8 +107,6 @@ function mapFetch(variableName) {
 
 
 /********** JQUERY  *****************/
-var maVariablePrecedente = "";
-
 $(".sport").click(function(){
     // var clicks = $(this).data('clicks') || true; 
 var clicks = $(this).data('clicks') 
@@ -116,9 +114,9 @@ var clicks = $(this).data('clicks')
          var maVariable = $(this).attr("id");
          mapFetch(maVariable);
      }
-     if (!clicks) {
-         markers.clearLayers() ; 
-     }
+    //  if (!clicks) {
+    //      markers.clearLayers() ; 
+    //  }
      $(this).data("clicks", !clicks);
  });
 
@@ -128,14 +126,16 @@ function clearMarkers() {
 
 $(".geolocalisation").click(function(){
     // var clicks = $(this).data('clicks') || true; 
-var clicks = $(this).data('clicks') 
+    var clicks = $(this).data('clicks') 
      if (clicks) {
         Geolocalisation();
      }
-
      $(this).data("clicks", !clicks);
  });
 
+ $(".Reset").click(function(){
+    markers.clearLayers();
+ });
 
 function Geolocalisation(){
     const locationOptions = {
