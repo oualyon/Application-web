@@ -29,13 +29,13 @@ let GeolocalisationLayer ;
 
 function mapFetch(variableName) {
     /*** Qualif ***/
-    // fetch('http://localhost:5000/geo/' + variableName)
+    fetch('http://localhost:5000/geo/' + variableName)
     /*** Qualif ***/
     
     /*** Production ***/
-    const domain = window.location.hostname;
-    const url = 'https://' + domain + '/geo/' + variableName;
-    fetch(url)
+    // const domain = window.location.hostname;
+    // const url = 'https://' + domain + '/geo/' + variableName;
+    // fetch(url)
     /*** Production ***/
     .then(res => res.json())
     .then(data => {
@@ -59,13 +59,13 @@ function mapFetch(variableName) {
 
 function roadFetch(variableName) {
     /*** Qualif ***/
-    //  fetch('http://localhost:5000/itinary/' + variableName)
+     fetch('http://localhost:5000/itinary/' + variableName)
     /*** Qualif ***/
     
     /*** Production ***/
-    const domain = window.location.hostname;
-    const url = 'https://' + domain + '/itinary/' + variableName;
-    fetch(url)
+    // const domain = window.location.hostname;
+    // const url = 'https://' + domain + '/itinary/' + variableName;
+    // fetch(url)
     /*** Production ***/
     .then(res => res.json())
     .then(data => {
