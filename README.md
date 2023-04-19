@@ -42,7 +42,7 @@ Le projet est développé en utilisant les technologies suivantes :
 ![Logo](img/logo.png)
 
 
-## Authors
+## Auteurs
 
 - Théo Gaschard [@TheoGaschard](https://github.com/TheoGaschard) (Dev Back)
 - Stéphane Duboze [@Black-Thor](https://github.com/Black-Thor) (Dev Back)
