@@ -27,64 +27,49 @@ var markersVelov = L.layerGroup(1).addTo(map); // Create a layer group to store 
 var markersItinary = L.layerGroup(2).addTo(map); // Create a layer group to store markers
 let GeolocalisationLayer ;
 
-function mapFetch(variableName) {
-    /*** Qualif ***/
-    // fetch('http://localhost:5000/geo/' + variableName)
-    /*** Qualif ***/
-    
-    /*** Production ***/
-    const domain = window.location.hostname;
-    const url = 'https://' + domain + '/geo/' + variableName;
-    fetch(url)
-    /*** Production ***/
+function createMarkers(data, variableName, markerIcon, markersLayer) {
+    var selectedIcon;
+    if (variableName == "Station") {
+      selectedIcon = Station;
+    } else if (/^Bar/.test(variableName)) {
+      selectedIcon = Bar;
+    } else {
+      selectedIcon = markerIcon;
+    }
+    L.geoJson(data, {
+      pointToLayer: function (feature, latlng) {
+        return L.marker(latlng, {icon: selectedIcon});
+      },
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  "+  feature.properties["Code Postal"]);
+      }
+    }).addTo(markersLayer);
+  }
+  
+  function mapFetch(variableName) {
+    const fetchUrl = process.env.NODE_ENV === "production" 
+        ? `https://${window.location.hostname}/geo/${variableName}`
+        : `http://localhost:5000/geo/${variableName}`;
+    fetch(fetchUrl)
     .then(res => res.json())
     .then(data => {
-        // markers.clearLayers(); // Clear all markers before adding new ones
-        var selectedIcon; 
-        if(variableName == "Station"){
-            selectedIcon = Station;
-        }
-        L.geoJson(data, {
-            pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, {icon: selectedIcon});
-            },
-            onEachFeature: function (feature, layer) {
-
-                layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  "+  feature.properties["Code Postal"] );
-            }
-        }).addTo(markersVelov); // Add new markers to the markers layer group
+      // markersVelov.clearLayers(); // Clear all markers before adding new ones
+      createMarkers(data, variableName, null, markersVelov);
     });
-}
-
-
-function roadFetch(variableName) {
-    /*** Qualif ***/
-    //  fetch('http://localhost:5000/itinary/' + variableName)
-    /*** Qualif ***/
-    
-    /*** Production ***/
-    const domain = window.location.hostname;
-    const url = 'https://' + domain + '/itinary/' + variableName;
-    fetch(url)
-    /*** Production ***/
+  }
+  
+  function roadFetch(variableName) {
+    const fetchUrl = process.env.NODE_ENV === "production" 
+        ? `https://${window.location.hostname}/geo/${variableName}`
+        : `http://localhost:5000/geo/${variableName}`;
+    fetch(fetchUrl)
     .then(res => res.json())
     .then(data => {
-        // markers.clearLayers(); // Clear all markers before adding new ones
-        var selectedIcon; 
-        if(/^Bar/.test(variableName)){
-            selectedIcon = Bar;
-        }
-        L.geoJson(data, {
-            pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, {icon: selectedIcon});
-            },
-            onEachFeature: function (feature, layer) {
-
-                layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  "+  feature.properties["Code Postal"] );
-            }
-        }).addTo(markersItinary); // Add new markers to the markers layer group
+      // markersItinary.clearLayers(); // Clear all markers before adding new ones
+      createMarkers(data, variableName, null, markersItinary);
     });
-}
+  }
+  
 
 function Geolocalisation() {
     

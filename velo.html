@@ -54,6 +54,10 @@ integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
 crossorigin=""></script>
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="velo.js"></script>
+<script>
+	// définition manuelle de NODE_ENV pour tester différents comportements
+	process = { env: { NODE_ENV: 'preprod' } };
+  </script>
 
 </body>
 </html>
