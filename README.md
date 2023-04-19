@@ -44,7 +44,7 @@ Le projet est développé en utilisant les technologies suivantes :
 
 ## Authors
 
-- Théo Gaschard[@TheoGaschard](https://github.com/TheoGaschard)
-- Stéphane Duboze[@Black-Thor](https://github.com/Black-Thor)
-- Hugo Lefebvre[@HugoLefebvreee](https://github.com/HugoLefebvreee)
-- Paul Martischang[@Paulochon25](https://github.com/Paulochon25)
+- Théo Gaschard [@TheoGaschard](https://github.com/TheoGaschard)
+- Stéphane Duboze [@Black-Thor](https://github.com/Black-Thor)
+- Hugo Lefebvre [@HugoLefebvreee](https://github.com/HugoLefebvreee)
+- Paul Martischang [@Paulochon25](https://github.com/Paulochon25)
