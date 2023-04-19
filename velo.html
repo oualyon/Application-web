@@ -2,7 +2,9 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<link rel="icon" type="image/png" href="img/icon.png" />
 	<link rel="stylesheet" type="text/css" href="style.css">
+	
 	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
 	integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
 	crossorigin=""></script>
@@ -31,29 +33,45 @@
 			</div></a>	
 		</div>
 	</header>
+
 	<main>
 		<h4>A la recherche d'une piste cyclable ?</h4>
 		<div id="divider"></div>
-		
-		<div id="map"></div>
-		<div class="geolocalisation">Me géolocaliser</div>
-				<select  id="container-btn">
-					<option  id="gpx" 	    class="btn-filtre  button  road">Tête d'or</option>
-					<option  id="Bar" 	    class="btn-filtre  button road">Barathon</option>
-					<option  id="Bar_guillotiere_to_vieuxlyon" 	    class="btn-filtre button  road">Barathon 2 </option>
-					<option  id="Station" 	class="btn-filtre button Velov ">Velov</option>
-					<option  id="Geolocalisation" 	class="btn-filtre button Geolocalisation ">Geolocalisation</option>
-				</select>		
+
+		<div class="alignedButton">
+			<button class="button geolocalisation">Me géolocaliser</button>
+			<button id="Station" class="button  Velov ">Station de vélo'v</button>
+			<button id="Reset" class="button Reset " >Vider la carte </button>
 		</div>
 
+		<form id="myForm">
+			<select  id="container-btn">
+			<option  id="balade_rhone" class="btn-filtre button road">Tête d'or</option>
+			<option  id="BarathonA" class="btn-filtre button road">Barathon</option>
+			<option  id="BarathonB" class="btn-filtre button road">Barathon route 2</option>
+			<option  id="Balade_Presquile_historique" class="btn-filtre button road">Presqu'ile historique</option>
+			<option  id="Balade_StreetArt_1" class="btn-filtre button road">StreetArt route 1</option>
+			<option  id="Balade_StreetArt_2" class="btn-filtre button road">StreetArt route 2</option>
+			<option  id="Balade_Vieux_Lyon_Historique" class="btn-filtre button road">Vieux Lyon Historique</option>
+
+			</select>
+			<input class="button" type="submit" value="Afficher" />
+		</form>
+
+		<div id="map"></div>
 	</main>
 </body>
 
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" 
 integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
 crossorigin=""></script>
+
 <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="velo.js"></script>
+<script>
+	// définition manuelle de NODE_ENV pour tester différents comportements
+	process = { env: { NODE_ENV: 'production' } };
+  </script>
 
 </body>
 </html>

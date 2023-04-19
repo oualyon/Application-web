@@ -22,7 +22,15 @@ var BasketBall = new LeafIcon({iconUrl: 'img/Basketball.png'}),
     Tennis_table = new LeafIcon({iconUrl: 'img/Pingpong.png'}),
     VolleyBall = new LeafIcon({iconUrl: 'img/Volley.png'}),
     Martiaux = new LeafIcon({iconUrl: 'img/Judo.png'}),
-    Rugby = new LeafIcon({iconUrl: 'img/Rugby.png'});
+    Rugby = new LeafIcon({iconUrl: 'img/Rugby.png'}), 
+    Homme = new LeafIcon({iconUrl: 'img/homme.png'})
+    SkatePark = new LeafIcon({iconUrl: 'img/Skateboard.png'}),
+    Equitation = new LeafIcon({iconUrl: 'img/Equitation.png'}),
+    Danse = new LeafIcon({iconUrl: 'img/Danse.png'}),
+    Baseball = new LeafIcon({iconUrl: 'img/Baseball.png'})    
+    ;
+
+   
 
 /********** MAP  *****************/
 var map = L.map('map').setView([45.7603831, 4.849664], 13);
@@ -34,76 +42,60 @@ var OpenStreetMap_France = L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/
 OpenStreetMap_France.addTo(map);
 
 var markers = L.layerGroup().addTo(map); // Create a layer group to store markers
-
+var myLayers = {};
 function mapFetch(variableName) {
-    /*** Qualif ***/
-    // fetch('http://localhost:5000/geo/' + variableName)
-    /*** Qualif ***/
-    
-    /*** Production ***/
-    const domain = window.location.hostname;
-    const url = 'https://' + domain + '/geo/' + variableName;
-    fetch(url)
-    /*** Production ***/
+    const icons = {
+        "BasketBall": BasketBall,
+        "Tir": Tir,
+        "Course%20à%20pied": Course,
+        "Tennis%20de%20table": Tennis_table,
+        "Arts%20martiaux": Martiaux,
+        "Pétanque": Petanque,
+        "VolleyBall": VolleyBall,
+        "Escalade": Escalade,
+        "FootBall": FootBall,
+        "Gymnase": Gymnase,
+        "Natation": Natation,
+        "Rugby": Rugby,
+        "Randos": Randos,
+        "Station": Station,
+        "SkatePark": SkatePark,
+        "Equitation": Equitation,
+        "Baseball": Baseball,
+        "Danse": Danse
 
+    };
+
+    const fetchUrl = process.env.NODE_ENV === "production" 
+        ? `https://${window.location.hostname}/geo/${variableName}`
+        : `http://localhost:5000/geo/${variableName}`;
+
+       // Créer une variable globale pour stocker les layers
+
+fetch(fetchUrl)
     .then(res => res.json())
     .then(data => {
-        // markers.clearLayers();
-        var selectedIcon;
-
-        if(variableName == "BasketBall"){
-            selectedIcon = BasketBall;
-        }
-        else if(variableName == "Tir"){
-            selectedIcon = Tir;
-        }
-        else if(variableName == "Course%20à%20pied"){
-            selectedIcon = Course;
-        }
-        else if(variableName == "Tennis%20de%20table"){
-            selectedIcon = Tennis_table;
-        }
-        else if(variableName == "Arts%20martiaux"){
-            selectedIcon = Martiaux;
-        }
-        else if(variableName == "Pétanque"){
-            selectedIcon = Petanque;
-        }
-        else if(variableName == "VolleyBall"){
-            selectedIcon = VolleyBall;
-        }
-        else if(variableName == "Escalade"){
-            selectedIcon = Escalade;
-        }
-        else if(variableName == "FootBall"){
-            selectedIcon = FootBall;
-        }
-        else if(variableName == "Gymnase"){
-            selectedIcon = Gymnase;
-        }
-        else if(variableName == "Natation"){
-            selectedIcon = Natation;
-        }
-        else if(variableName == "Rugby"){
-            selectedIcon = Rugby;
-        }
-        else if(variableName == "Randos"){
-            selectedIcon = Randos;
-        }
-        else if(variableName == "Station"){
-            selectedIcon = Station;
-        }
         L.geoJson(data, {
             pointToLayer: function (feature, latlng) {
-                return L.marker(latlng, {icon: selectedIcon});
+                const selectedIcon = icons[variableName];
+                const markerLayer = L.marker(latlng, {icon: selectedIcon} , feature.properties.Category);
+                return markerLayer;
             },
             onEachFeature: function (feature, layer) {
-
-                layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  "+  feature.properties["Code Postal"] );
+                const name = feature.properties.Name;
+                const address = feature.properties.Adresse;
+                const postalCode = feature.properties["Code Postal"];
+                layer.bindPopup(`<b><big><u>Nom:</u> ${name}<br></b></big></u> <b>Adresse:&nbsp;</b> ${address}</b></big></u> ${postalCode}`);
             }
-        }).addTo(markers); // Add new markers to the markers layer group
+        }).addTo(markers);
+    })
+    .catch(error => {
+        console.error(`Error fetching ${fetchUrl}`, error);
     });
+    
 }
+
+
 
 
 /********** JQUERY  *****************/
@@ -112,10 +104,10 @@ $(".sport").click(function(){
      if (clicks) {
          var maVariable = $(this).attr("id");
          mapFetch(maVariable);
+     }else {
+        markers.clearLayers();
+        console.log('test');
      }
-    //  if (!clicks) {
-    //      markers.clearLayers() ; 
-    //  }
      $(this).data("clicks", !clicks);
  });
 
@@ -123,19 +115,17 @@ function clearMarkers() {
     markers.clearLayers();
 }
 
-$(".geolocalisation").click(function(){
-    // var clicks = $(this).data('clicks') || true; 
+ $(".Reset").click(function(){
+    markers.clearLayers();
+ });
+
+ $(".geolocalisation").click(function(){
     var clicks = $(this).data('clicks') 
      if (clicks) {
         Geolocalisation();
      }
      $(this).data("clicks", !clicks);
  });
-
- $(".Reset").click(function(){
-    markers.clearLayers();
- });
-
 function Geolocalisation(){
     const locationOptions = {
         maximumAge: 10000,
@@ -158,7 +148,7 @@ function handleLocation(position) {
     map.setZoom(18);
     /* Centre la carte sur la latitude et la longitude de la localisation de l'utilisateur */
     map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
-    var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+    var marker = L.marker([position.coords.latitude, position.coords.longitude] , {icon: Homme}).addTo(map);
 
 }
 
