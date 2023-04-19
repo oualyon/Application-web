@@ -83,11 +83,12 @@ a {
 	padding: 0.25%;
 	border-radius: 1em;
 	margin-right: 0.5%;
-	background-color: #7FC6A4;
+	background-color: #7fc6a4;
 }
 .sport:hover {
 	color: #00381d;
-	background-color: #3bc985
+	background-color: #114B5F; 
+	
 }
   
 .sport:active {
@@ -131,7 +132,7 @@ a {
 }
 .button:hover {
 	color: #00381d;
-	background-color: #3bc985
+	background-color: #3bc985; 
 }
   
 .button:active {

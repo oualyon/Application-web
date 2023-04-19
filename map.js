@@ -22,7 +22,14 @@ var BasketBall = new LeafIcon({iconUrl: 'img/Basketball.png'}),
     Tennis_table = new LeafIcon({iconUrl: 'img/Pingpong.png'}),
     VolleyBall = new LeafIcon({iconUrl: 'img/Volley.png'}),
     Martiaux = new LeafIcon({iconUrl: 'img/Judo.png'}),
-    Rugby = new LeafIcon({iconUrl: 'img/Rugby.png'});
+    Rugby = new LeafIcon({iconUrl: 'img/Rugby.png'}), 
+    Homme = new LeafIcon({iconUrl: 'img/homme.png'})
+    SkatePark = new LeafIcon({iconUrl: 'img/Skateboard.png'}),
+    Equitation = new LeafIcon({iconUrl: 'img/Equitation.png'}),
+    Danse = new LeafIcon({iconUrl: 'img/Danse.png'}),
+    Baseball = new LeafIcon({iconUrl: 'img/Baseball.png'})    
+    ;
+
    
 
 /********** MAP  *****************/
@@ -51,7 +58,12 @@ function mapFetch(variableName) {
         "Natation": Natation,
         "Rugby": Rugby,
         "Randos": Randos,
-        "Station": Station
+        "Station": Station,
+        "SkatePark": SkatePark,
+        "Equitation": Equitation,
+        "Baseball": Baseball,
+        "Danse": Danse
+
     };
 
     const fetchUrl = process.env.NODE_ENV === "production" 
@@ -136,7 +148,7 @@ function handleLocation(position) {
     map.setZoom(18);
     /* Centre la carte sur la latitude et la longitude de la localisation de l'utilisateur */
     map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
-    var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+    var marker = L.marker([position.coords.latitude, position.coords.longitude] , {icon: Homme}).addTo(map);
 
 }
 

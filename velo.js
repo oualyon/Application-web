@@ -6,12 +6,14 @@ var LeafIcon = L.Icon.extend({
         // shadowSize:   [50, 64],
         iconAnchor:   [25,50],
         // shadowAnchor: [4, 62],
-        popupAnchor:  [0, -39]
+        popupAnchor:  [0, -39] , 
     }
 });
+
 var Station = new LeafIcon({iconUrl: 'img/Station.png'}),
     Bar = new LeafIcon({iconUrl: 'img/Biere.png'}),
-    Monument = new LeafIcon({iconUrl: 'img/monument.png'}) ;
+    Monument = new LeafIcon({iconUrl: 'img/monument.png'}), 
+    Homme = new LeafIcon({iconUrl: 'img/homme.png'});
 
 
 /********** MAP  *****************/
@@ -45,7 +47,7 @@ function createMarkers(data, variableName, markerIcon, markersLayer) {
         return L.marker(latlng, {icon: selectedIcon});
       },
       onEachFeature: function (feature, layer) {
-        layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  "+  feature.properties["Code Postal"]);
+        layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  ");
       }
     }).addTo(markersLayer);
   }
@@ -104,14 +106,10 @@ function Geolocalisation(){
 
 }
 
-
 function handleLocation(position) {
-    /* Zoom avant de trouver la localisation */
     map.setZoom(18);
-    /* Centre la carte sur la latitude et la longitude de la localisation de l'utilisateur */
     map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
-    var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
-
+    var marker = L.marker([position.coords.latitude, position.coords.longitude] ).addTo(map);
 }
 
 function handleLocationError(msg) {
@@ -213,7 +211,7 @@ function handleLocation(position) {
     map.setZoom(18);
     /* Centre la carte sur la latitude et la longitude de la localisation de l'utilisateur */
     map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
-    GeolocalisationLayer = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+    GeolocalisationLayer = L.marker([position.coords.latitude, position.coords.longitude] , {icon: Homme}).addTo(map);
 
 }
 
