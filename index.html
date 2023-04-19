@@ -3,6 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="icon" type="image/png" href="img/icon.png" />
+
 	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
 	integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
 	crossorigin=""></script>
@@ -33,21 +35,25 @@
 	<main>
 		<h4>Vous recherchez une activité proche de chez vous ?</h4>
 		<div id="divider"></div>
-		<div class="geolocalisation">Me géolocaliser</div>
+		<button class="button geolocalisation">Me géolocaliser</button>
 
-		<img id="Tir"       class="sport" src="img/Archer.png"></img>
-		<img id="BasketBall"class="sport" src="img/Basketball.png"></img>
-		<img id="Course%20à%20pied"    class="sport" src="img/Course.png"></img>
-		<img id="Escalade"  class="sport" src="img/Escalade.png"></img>
-		<img id="Arts%20martiaux" 		class="sport" src="img/Judo.png"></img>
-		<img id="Natation"  class="sport" src="img/Natation.png"></img>
-		<img id="Pétanque"  class="sport" src="img/Petanque.png"></img>
-		<img id="Tennis%20de%20table"  class="sport" src="img/Pingpong.png"></img>
-		<img id="VolleyBall"    class="sport" src="img/Volley.png"></img>
-		<img id="FootBall" 	class="sport" src="img/Football.png"></img>
-		<img id="Rugby"     class="sport" src="img/Rugby.png" ></img>
-		<img id="Gymnase"   class="sport" src="img/Gymnase.png" ></img>
-		<img id="Reset"    class="sport Reset" src="img/Reset.png" ></img>
+		<img title="Sport de tir " id="Tir"       class="sport" src="img/Archer.png"></img>
+		<img title="BasketBall" id="BasketBall"class="sport" src="img/Basketball.png"></img>
+		<img title="Course à pied" id="Course%20à%20pied"    class="sport" src="img/Course.png"></img>
+		<img title="Escalade" id="Escalade"  class="sport" src="img/Escalade.png"></img>
+		<img title="Arts martieaux" id="Arts%20martiaux" 		class="sport" src="img/Judo.png"></img>
+		<img title="Natation" id="Natation"  class="sport" src="img/Natation.png"></img>
+		<img title="Pétanque" id="Pétanque"  class="sport" src="img/Petanque.png"></img>
+		<img title="Tennis de table" id="Tennis%20de%20table"  class="sport" src="img/Pingpong.png"></img>
+		<img title="VolleyBall" id="VolleyBall"    class="sport" src="img/Volley.png"></img>
+		<img title="FootBall" id="FootBall" 	class="sport" src="img/Football.png"></img>
+		<img title="Rugby" id="Rugby"     class="sport" src="img/Rugby.png" ></img>
+		<img title="Gymnase" id="Gymnase"   class="sport" src="img/Gymnase.png" ></img>
+		<img title="SkatePark" id="SkatePark"   class="sport" src="img/Skateboard.png" ></img>
+		<img title="Equitation" id="Equitation"   class="sport" src="img/Equitation.png" ></img>
+		<img title="Danse" id="Danse"   class="sport" src="img/Danse.png" ></img>
+		<img title="Baseball" id="Baseball"   class="sport" src="img/Baseball.png" ></img>
+		<img title="Reset" id="Reset"    class="sport Reset" src="img/Reset.png" ></img>
 
 		<div id="map">
 
@@ -65,7 +71,7 @@ crossorigin=""></script>
 
 <script>
 	// définition manuelle de NODE_ENV pour tester différents comportements
-	process = { env: { NODE_ENV: 'preprod' } };
+	process = { env: { NODE_ENV: 'production' } };
   </script>
 
 

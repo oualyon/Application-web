@@ -6,11 +6,14 @@ var LeafIcon = L.Icon.extend({
         // shadowSize:   [50, 64],
         iconAnchor:   [25,50],
         // shadowAnchor: [4, 62],
-        popupAnchor:  [0, -39]
+        popupAnchor:  [0, -39] , 
     }
 });
+
 var Station = new LeafIcon({iconUrl: 'img/Station.png'}),
-Bar = new LeafIcon({iconUrl: 'img/Biere.png'});
+    Bar = new LeafIcon({iconUrl: 'img/Biere.png'}),
+    Monument = new LeafIcon({iconUrl: 'img/monument.png'}), 
+    Homme = new LeafIcon({iconUrl: 'img/homme.png'});
 
 
 /********** MAP  *****************/
@@ -31,8 +34,11 @@ function createMarkers(data, variableName, markerIcon, markersLayer) {
     var selectedIcon;
     if (variableName == "Station") {
       selectedIcon = Station;
-    } else if (/^Bar/.test(variableName)) {
+    } 
+    else if (/^Barathon[AB]?/.test(variableName)    ) {
       selectedIcon = Bar;
+    }else if (/^Balade_.*/.test(variableName)    ) {
+      selectedIcon = Monument;
     } else {
       selectedIcon = markerIcon;
     }
@@ -41,79 +47,113 @@ function createMarkers(data, variableName, markerIcon, markersLayer) {
         return L.marker(latlng, {icon: selectedIcon});
       },
       onEachFeature: function (feature, layer) {
-        layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  "+  feature.properties["Code Postal"]);
+        layer.bindPopup("<b><big><u>Nom:</u>  " + feature.properties.Name + "<br> </b></big></u></br> <b>Adresse:&nbsp;</b>" + feature.properties.Adresse + "</b></big></u>  ");
       }
     }).addTo(markersLayer);
   }
   
-  function mapFetch(variableName) {
+function mapFetch(variableName) {
+    console.log(variableName); 
     const fetchUrl = process.env.NODE_ENV === "production" 
         ? `https://${window.location.hostname}/geo/${variableName}`
         : `http://localhost:5000/geo/${variableName}`;
     fetch(fetchUrl)
     .then(res => res.json())
     .then(data => {
-      // markersVelov.clearLayers(); // Clear all markers before adding new ones
-      createMarkers(data, variableName, null, markersVelov);
+      createMarkers(data, variableName, null , markersVelov);
     });
   }
   
-  function roadFetch(variableName) {
+function roadFetch(variableName) {
     const fetchUrl = process.env.NODE_ENV === "production" 
-        ? `https://${window.location.hostname}/geo/${variableName}`
-        : `http://localhost:5000/geo/${variableName}`;
+        ? `https://${window.location.hostname}/itinary/${variableName}`
+        : `http://localhost:5000/itinary/${variableName}`;
+        console.log(fetchUrl) ; 
     fetch(fetchUrl)
     .then(res => res.json())
     .then(data => {
-      // markersItinary.clearLayers(); // Clear all markers before adding new ones
+        console.log(data) ; 
       createMarkers(data, variableName, null, markersItinary);
     });
   }
   
+  $(".Reset").click(function(){
+    markersVelov.clearLayers()
+    markersItinary.clearLayers()
+ });
 
-function Geolocalisation() {
-    
+
+ $(".geolocalisation").click(function(){
+    var clicks = $(this).data('clicks') 
+     if (clicks) {
+        Geolocalisation();
+     }
+     $(this).data("clicks", !clicks);
+ });
+function Geolocalisation(){
+    const locationOptions = {
+        maximumAge: 10000,
+        timeout: 5000,
+        enableHighAccuracy: true
+    };
+     /* Verifie que le navigateur est compatible avec la géolocalisation */
+     if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(handleLocation, handleLocationError, locationOptions);
+    } else {
+        /* Le navigateur n'est pas compatible */
+        alert("Géolocalisation indisponible");
+    }
+
 }
+
+function handleLocation(position) {
+    map.setZoom(18);
+    map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
+    var marker = L.marker([position.coords.latitude, position.coords.longitude] ).addTo(map);
+}
+
+function handleLocationError(msg) {
+    alert("Erreur lors de la géolocalisation");
+}
+
+
 /********** JQUERY  *****************/
-$(document).ready(function() {
-    $('#container-btn').change(function() {
-      var selectedOption = $('#container-btn option:selected').attr('id');
+$('#myForm').on('submit', function(event) {
+    event.preventDefault(); // Empêche la soumission normale du formulaire
   
-      switch (selectedOption) {
-        case 'gpx':
-            roadFetch(selectedOption);
+    var selectedOption = $('#container-btn option:selected').attr('id');
+    console.log(selectedOption) ; 
+
+    switch (selectedOption) {
+      case 'balade_rhone':
+          roadFetch(selectedOption);
+        break;
+      case 'BarathonA':
+          roadFetch(selectedOption);
+        break;
+      case 'BarathonB':
+          roadFetch(selectedOption);
           break;
-        case 'Bar':
-            roadFetch(selectedOption);
+      case 'Balade_Presquile_historique':
+          roadFetch(selectedOption);
           break;
-        case 'Bar_guillotiere_to_vieuxlyon':
+      case 'Balade_StreetArt_1':
             roadFetch(selectedOption);
             break;
-        case 'Station':
-            mapFetch(selectedOption);
-            $(".Velov").click(function() {
-                var clicks = $(this).data('clicks');
-                if (clicks) {
-                  var pointFix = $(this).attr("id");
-                  mapFetch(pointFix);
-                } else {
-                  markersVelov.clearLayers();
-                }
-                $(this).data("clicks", !clicks);
-              });
+      case 'Balade_StreetArt_2':
+            roadFetch(selectedOption);
             break;
-        case 'Geolocalisation':
-          // Action à effectuer pour l'option Geolocalisation
-          break;
-        default:
-          // Action à effectuer si aucune option n'est sélectionnée
-          break;
-      }
-    });
+      case 'Balade_Vieux_Lyon_Historique':
+            roadFetch(selectedOption);
+        break;
+      default:
+        // Action à effectuer si aucune option n'est sélectionnée
+        break;
+    }
   });
-  
-function veloSation(){
-    $(".Velov").click(function() {
+
+
+$(".Velov").click(function() {
         var clicks = $(this).data('clicks');
         if (clicks) {
         var pointFix = $(this).attr("id");
@@ -122,8 +162,7 @@ function veloSation(){
             markersVelov.clearLayers();
         }
         $(this).data("clicks", !clicks);
-      });
-}
+});
 
 $(".road").click(function() {
     var clicks = $(this).data('clicks');
@@ -136,7 +175,7 @@ $(".road").click(function() {
     $(this).data("clicks", !clicks);
   });
 
-
+/**** Geoloc ****/
 $(".geolocalisation").click(function(){
     // var clicks = $(this).data('clicks') || true; 
 var clicks = $(this).data('clicks') 
@@ -172,14 +211,14 @@ function handleLocation(position) {
     map.setZoom(18);
     /* Centre la carte sur la latitude et la longitude de la localisation de l'utilisateur */
     map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
-    GeolocalisationLayer = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+    GeolocalisationLayer = L.marker([position.coords.latitude, position.coords.longitude] , {icon: Homme}).addTo(map);
 
 }
 
 function handleLocationError(msg) {
     alert("Erreur lors de la géolocalisation");
 }
-
+/**** Geoloc ****/
 $("#logo").click(function() {
     window.location.href  = "index.html";
 })
