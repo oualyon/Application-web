@@ -13,15 +13,15 @@ Que l’on soit un habitant de longue date, un visiteur occasionnel ou une perso
 
 
 
-## Run Locally
+## Lancement local
 
-Clone the project
+Clone le projet
 
 ```bash
   git clone git clone https://github.com/oualyon/Application-web.git
 ```
 
-Go to the project directory
+Aller dans le répertoire du projet
 
 ```bash
   cd Application-web
