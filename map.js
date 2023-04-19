@@ -103,18 +103,17 @@ function clearMarkers() {
     markers.clearLayers();
 }
 
-$(".geolocalisation").click(function(){
+ $(".Reset").click(function(){
+    markers.clearLayers();
+ });
+
+ $(".geolocalisation").click(function(){
     var clicks = $(this).data('clicks') 
      if (clicks) {
         Geolocalisation();
      }
      $(this).data("clicks", !clicks);
  });
-
- $(".Reset").click(function(){
-    markers.clearLayers();
- });
-
 function Geolocalisation(){
     const locationOptions = {
         maximumAge: 10000,
