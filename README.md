@@ -29,11 +29,26 @@ Go to the project directory
 Ouvrez le fichier index.html dans votre navigateur web.
 
 
-## Installation
+## Technologies utilisées
+Le projet est développé en utilisant les technologies suivantes :
 
+- HTML
 
+- CSS
 
+- JavaScript
 
+- API Google Maps
 ## Logo
 ![Logo](https://raw.githubusercontent.com/oualyon/Application-web/main/img/logo.png?token=GHSAT0AAAAAACBLHYMOQCV23PA7CFY2JGF2ZB7XMDQ)
 
+
+## Authors
+
+- [Théo Gaschard](https://github.com/TheoGaschard)
+- [Yannick Mondongue](https://github.com/YannickMondongue)
+- [Stéphane Duboze](https://github.com/Black-Thor)
+- [Ousmane Cisse](https://github.com/ousmanecisse6541244)
+- [Hugo Lefebvre](https://github.com/HugoLefebvreee)
+- [Emma Karsenty](https://github.com/Emma-kars)
+- [Paul MARTISCHANG](https://github.com/Paulochon25)
