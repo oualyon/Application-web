@@ -188,6 +188,11 @@ a {
 	top: 20px;
 	right: 50Px;
 }
+@media only screen and (min-width: 1400px) {
+	#map {
+		height: 50%;
+	}
+}
 @media only screen and (min-width:1250px) and (max-width: 1400px) {
 	#map {
 	  height: 55%;
