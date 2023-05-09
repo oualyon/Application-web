@@ -27,7 +27,8 @@ var BasketBall = new LeafIcon({iconUrl: 'img/Basketball.png'}),
     SkatePark = new LeafIcon({iconUrl: 'img/Skateboard.png'}),
     Equitation = new LeafIcon({iconUrl: 'img/Equitation.png'}),
     Danse = new LeafIcon({iconUrl: 'img/Danse.png'}),
-    Baseball = new LeafIcon({iconUrl: 'img/Baseball.png'})    
+    Baseball = new LeafIcon({iconUrl: 'img/Baseball.png'}),
+    Station = new LeafIcon({iconUrl: 'img/Station.png'})    
     ;
 
    
@@ -62,7 +63,9 @@ function mapFetch(variableName) {
         "SkatePark": SkatePark,
         "Equitation": Equitation,
         "Baseball": Baseball,
-        "Danse": Danse
+        "Danse": Danse,
+        "Station": Station
+
 
     };
 
@@ -110,6 +113,20 @@ $(".sport").click(function(){
      }
      $(this).data("clicks", !clicks);
  });
+
+ $(".Velov").click(function() {
+    var clicks = $(this).data('clicks');
+    
+    if (clicks) {
+        var maVariable = $(this).attr("id");
+        console.log('testid');
+        mapFetch(maVariable);
+    } else {
+        markers.clearLayers();
+        console.log('test');
+    }
+    $(this).data("clicks", !clicks);
+});
 
 function clearMarkers() {
     markers.clearLayers();
